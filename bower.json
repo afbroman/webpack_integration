@@ -1,0 +1,9 @@
+{
+  "name": "webpack-integration",
+  "version": "1.0.0",
+  "description": "webpack-integration",
+  "dependencies": {
+    "jquery": "^1.12",
+    "lodash": "^4.3"
+  }
+}
