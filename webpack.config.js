@@ -16,6 +16,9 @@ config.output = {
   filename: 'bundle.js',
   // if the webpack code-splitting feature is enabled, this is the path it wil use to download bundles
   publicPath: '/assets',
+  // improve output of source maps
+  devtoolModuleFilenameTemplate: '[resourcePath]',
+  devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]',
 };
 
 config.resolve = {
@@ -26,10 +29,15 @@ config.resolve = {
   modulesDirectories: [ 'node_modules', 'bower_components' ],
 };
 
-config.plugins = {
-  // we need thi splugin to teach webpack how to find module entry points for bower files,
+config.plugins = [
+  // we need this plugin to teach webpack how to find module entry points for bower files,
   // as these may not have a package.json file
   new webpack.ResolverPlugin([
     new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
-  ])
-};
+  ]),
+
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+  })
+];
